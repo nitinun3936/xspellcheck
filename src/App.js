@@ -1,23 +1,47 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
+const customDictionary = {
+  teh: 'the',
+  wrok: 'work',
+  fot: 'for',
+  exampl: 'example',
+};
+
 function App() {
+  const [text, setText] = useState('');
+  const [suggestion, setSuggestion] = useState('');
+
+  const handleChange = (e) => {
+    const inputText = e.target.value;
+    setText(inputText);
+
+    const words = inputText.split(' ');
+    for (let word of words) {
+      const lowerCaseWord = word.toLowerCase();
+      if (customDictionary[lowerCaseWord]) {
+        setSuggestion(customDictionary[lowerCaseWord]);
+        return;
+      }
+    }
+    setSuggestion('');
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <h1>Spell Check and Auto-Correction</h1>
+      <textarea
+        value={text}
+        onChange={handleChange}
+        placeholder="Type here..."
+        rows="10"
+        cols="50"
+      />
+      {suggestion && (
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Did you mean: <span className="highlight">"{suggestion}"</span>?
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      )}
     </div>
   );
 }
