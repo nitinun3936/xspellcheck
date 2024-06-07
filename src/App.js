@@ -33,7 +33,7 @@ function App() {
       <textarea
         value={text}
         onChange={handleChange}
-        placeholder="Type here..."
+        placeholder="Enter here..."
         rows="10"
         cols="50"
       />
