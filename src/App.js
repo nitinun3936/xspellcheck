@@ -39,7 +39,7 @@ function App() {
       />
       {suggestion && (
         <p>
-          Did you mean: <span className="highlight">"{suggestion}"</span>?
+          Did you mean: <span className="highlight">{suggestion}</span>?
         </p>
       )}
     </div>
